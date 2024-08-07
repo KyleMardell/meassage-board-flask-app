@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container hero-section">
+    <div class="row">
+        <div class="col">
+            <h2>
+                Welcome to Message Board
+            </h2>
+            <p>A place to share your thoughts and helpful tips</p>
+        </div>
+    </div>
+</section>
+<section class="container showcase-section">
+    <div class="row">
+        <div class="col">
+            Topics Examples Here
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Post Examples here
+        </div>
+    </div>
+</section>
+<section class="container call-to-action">
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary" href="{{ url_for('login') }}">Join the conversation</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
