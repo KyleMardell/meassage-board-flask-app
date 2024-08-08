@@ -4,21 +4,59 @@
 <section class="container">
     <div class="row">
         <div class="col">
-
-            <form id="login-form">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" maxlength="25" class="form-control" id="username" name="username" required>
+            <div class="accordion accordion-flush" id="login-accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#login-collapse" aria-expanded="false" aria-controls="login-collapse">
+                            Log In
+                        </button>
+                    </h2>
+                    <div id="login-collapse" class="accordion-collapse collapse" data-bs-parent="#login-accordion">
+                        <div class="accordion-body">
+                            <form method="POST" action="{{ url_for('login') }}">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" maxlength="25" class="form-control" id="username" name="username"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" maxlength="25" class="form-control" id="password"
+                                        name="password" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Log In</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" maxlength="25" class="form-control" id="password" name="password" required>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#signup-collapse" aria-expanded="false" aria-controls="signup-collapse">
+                            Sign Up
+                        </button>
+                    </h2>
+                    <div id="signup-collapse" class="accordion-collapse collapse" data-bs-parent="#login-accordion">
+                        <div class="accordion-body">
+                            <form method="POST" action="{{ url_for('signup') }}">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" maxlength="25" class="form-control" id="username" name="username"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" maxlength="25" class="form-control" id="password"
+                                        name="password" required>
+                                </div>
+                                <p>Username and Passwords have a max length of 25 characters</p>
+                                <button type="submit" class="btn btn-success">Sign Up</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <p>Username and Passwords have a max length of 25 characters</p>
-                <button type="submit" class="btn btn-success">Log In</button>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </form>
-
+            </div>
         </div>
     </div>
 </section>
