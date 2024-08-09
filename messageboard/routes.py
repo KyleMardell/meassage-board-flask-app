@@ -5,11 +5,13 @@ from messageboard.model import User, Topic, Post, Comment
 from datetime import datetime
 
 
+# Index Page 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
+# Login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -20,12 +22,13 @@ def login():
             login_user(user)
             session['username'] = username
             session['user_id'] = user.id
+            session['user_is_admin'] = user.is_admin
             return redirect(url_for('home'))
         flash('Invalid username or password')
         return redirect(url_for('login'))
     return render_template("login.html")
 
-
+# Signup
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -50,6 +53,7 @@ def signup():
     return render_template('login.html')
 
 
+# Logout
 @app.route('/logout')
 @login_required
 def logout():
@@ -57,13 +61,17 @@ def logout():
     return redirect(url_for('index'))
 
 
+# Home
 @app.route('/home')
+@login_required
 def home():
     username = session.get('username', None)
     return render_template('home.html', username=username)
 
 
+# Topics
 @app.route('/topics')
+@login_required
 def topics():
     username = session.get('username', None)
     topics = list(Topic.query.order_by(Topic.name).all())
@@ -71,6 +79,7 @@ def topics():
 
 
 @app.route('/create_topic', methods=['GET', 'POST'])
+@login_required
 def create_topic():
     username = session.get('username', None)
     user_id = session.get('user_id', None)
@@ -89,8 +98,31 @@ def create_topic():
     return render_template('create_topic.html', username=username)
 
 
+# Posts
 @app.route('/create_post', methods=['GET', 'POST'])
+@login_required
 def create_post():
     username = session.get('username', None)
-
     return render_template('create_post.html', username=username)
+
+# Users page - Admin Only
+@app.route('/users', methods=['GET', 'POST'])
+@login_required
+def users():
+    username = session.get('username', None)
+
+    if request.method == 'POST':
+        for user in User.query.all():
+            user_id = user.id
+            checkbox_name = f'is-admin-{user_id}'
+            is_admin = checkbox_name in request.form
+
+            user.is_admin = is_admin
+            db.session.commit()
+        
+        flash('User roles updated successfully.')
+        return redirect(url_for('users'))
+
+    users = list(User.query.order_by(User.id).all())
+
+    return render_template('users.html', users=users, username=username)

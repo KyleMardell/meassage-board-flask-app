@@ -1,25 +1,28 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Topics</h1>
-<h2>Welcome: {{ username }}</h2>
 
 <section class="container">
+
+    <h1>Topics</h1>
+    <h2>Welcome: {{ username }}</h2>
+
+    {% if session['user_is_admin'] == True %}
     <div class="row">
         <div class="col">
             <a href="{{ url_for('create_topic') }}" class="btn">Create Topic</a>
         </div>
     </div>
+    {% endif %}
+
     <div class="row">
-
-            {% for topic in topics %}
-
+        {% for topic in topics %}
             <div class="col col-12">
                 <h2>{{ topic.name }}</h2>
             </div>
-
-            {% endfor %}
-
+        {% endfor %}
     </div>
+
 </section>
 
 {% endblock %}
