@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from messageboard import app, db, bcrypt
-from messageboard.model import User
+from messageboard.model import User, Topic, Post, Comment
 from datetime import datetime
 
 @app.route('/')
@@ -55,3 +55,8 @@ def logout():
 def home():
     username = session.get('username', None)
     return render_template('home.html', username=username)
+
+@app.route('/create_post', methods=['GET', 'POST'])
+def create_post():
+    username = session.get('username', None)
+    return render_template('create_post.html', username=username)

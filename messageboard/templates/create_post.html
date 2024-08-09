@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Create Post</h1>
+            <h2>Welcome: {{ username }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <form method="POST" action="">
+                <div class="mb-3">
+                    <label for="post-title" class="form-label">Email address</label>
+                    <input type="text" minlength="5" maxlength="50" class="form-control" id="post-title"
+                        placeholder="title" required>
+                </div>
+                <div class="mb-3">
+                    <select id="topic_id" name="topic_name" class="form-select" aria-label="Default select example"
+                        required>
+                        <option disabled selected>Choose topic</option>
+
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="post-content" class="form-label">Your post...</label>
+                    <textarea class="form-control" id="post-content" rows="3" required></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
