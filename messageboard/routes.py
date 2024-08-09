@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from messageboard import app, db, bcrypt
 from messageboard.model import User
@@ -16,6 +16,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and bcrypt.check_password_hash(user.password, password):
             login_user(user)
+            session['username'] = username
             return redirect(url_for('home'))
         flash('Invalid username or password')
         return redirect(url_for('login'))
@@ -37,6 +38,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user)
+            session['username'] = username
             return redirect(url_for('home'))
         else:
             flash('Passwords do not match')
@@ -51,4 +53,5 @@ def logout():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    username = session.get('username', None)
+    return render_template('home.html', username=username)
