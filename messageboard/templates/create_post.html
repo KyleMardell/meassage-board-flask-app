@@ -13,9 +13,9 @@
 
             <form method="POST" action="">
                 <div class="mb-3">
-                    <label for="post-title" class="form-label">Email address</label>
+                    <label for="post-title" class="form-label">Enter Title</label>
                     <input type="text" minlength="5" maxlength="50" class="form-control" id="post-title"
-                        placeholder="title" required>
+                        name="post-title" placeholder="title" required>
                 </div>
                 <div class="mb-3">
                     <select id="topic_id" name="topic_name" class="form-select" aria-label="Default select example"
@@ -30,8 +30,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="post-content" class="form-label">Your post...</label>
-                    <textarea class="form-control" id="post-content" rows="3" required></textarea>
+                    <textarea class="form-control" id="post-content" name="post-content" rows="3" required></textarea>
                 </div>
+                <button type="submit" class="btn btn-success">Create Post</button>
             </form>
         </div>
     </div>

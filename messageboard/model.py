@@ -8,7 +8,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(25), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
-    date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
     def __repr__(self):
         # __repr__ to represent itself in the form of a string
@@ -21,7 +21,7 @@ class Topic(db.Model):
     # schema for the Topic model
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True, nullable=False)
-    date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     creator_name = db.Column(db.String(25), db.ForeignKey("user.username"), nullable=False)
     posts = db.relationship("Post", backref="topic", cascade="all, delete", lazy=True, foreign_keys="[Post.topic_id]")
@@ -38,7 +38,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
     content = db.Column(db.Text, nullable=False)
-    date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     topic_id = db.Column(db.Integer, db.ForeignKey("topic.id", ondelete="CASCADE"), nullable=False)
     topic_name = db.Column(db.String(50), db.ForeignKey("topic.name"), nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -55,7 +55,7 @@ class Comment(db.Model):
     # schema for the Comment model
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
-    date = db.Column(db.Date, default=datetime.utcnow, nullable=False)
+    date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     creator_name = db.Column(db.String(25), db.ForeignKey("user.username"), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey("post.id", ondelete="CASCADE"), nullable=False)

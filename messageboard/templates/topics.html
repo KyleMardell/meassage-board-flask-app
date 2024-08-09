@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Topics</h1>
+<h2>Welcome: {{ username }}</h2>
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <a href="{{ url_for('create_topic') }}" class="btn">Create Topic</a>
+        </div>
+    </div>
+    <div class="row">
+
+            {% for topic in topics %}
+
+            <div class="col col-12">
+                <h2>{{ topic.name }}</h2>
+            </div>
+
+            {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}
