@@ -4,11 +4,11 @@ from messageboard import app, db, bcrypt
 from messageboard.model import User
 from datetime import datetime
 
-@app.route("/")
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
@@ -21,29 +21,34 @@ def login():
         return redirect(url_for('login'))
     return render_template("login.html")
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
+        password_repeat = request.form.get('password-repeat')
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash('Username already exists')
             return redirect(url_for('signup'))
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(username=username, password=hashed_password, date=datetime.utcnow())
-        db.session.add(new_user)
-        db.session.commit()
-        login_user(new_user)
-        return redirect(url_for('home'))
-    return render_template("login.html")
+        if password == password_repeat:
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+            new_user = User(username=username, password=hashed_password, date=datetime.utcnow())
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            return redirect(url_for('home'))
+        else:
+            flash('Passwords do not match')
+            return redirect(url_for('signup'))
+    return render_template('login.html')
 
-@app.route("/logout")
+@app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route("/home")
+@app.route('/home')
 def home():
-    return render_template("home.html")
+    return render_template('home.html')
