@@ -98,6 +98,15 @@ def create_topic():
     return render_template('create_topic.html', username=username)
 
 
+@app.route('/delete_topic/<int:topic_id>')
+@login_required
+def delete_topic(topic_id):
+    topic = Topic.query.get_or_404(topic_id)
+    db.session.delete(topic)
+    db.session.commit()
+    return redirect(url_for('topics'))
+
+
 # Posts
 @app.route('/create_post', methods=['GET', 'POST'])
 @login_required
