@@ -112,7 +112,27 @@ def delete_topic(topic_id):
 @login_required
 def create_post():
     username = session.get('username', None)
-    return render_template('create_post.html', username=username)
+    user_id = session.get('user_id', None)
+    topics = list(Topic.query.order_by(Topic.name).all())
+    
+    if request.method == 'POST':
+        current_time = datetime.now().strftime('%Y=%m-%d %H:%M:%S')
+        form_topic_value = request.form.get('topic_name')
+        form_topic_id, form_topic_name = form_topic_value.split('|')
+
+        post = Post(
+            title=request.form.get('post-title'),
+            content=request.form.get('post-content'),
+            date=current_time,
+            creator_name=username,
+            creator_id=user_id,
+            topic_id=form_topic_id,
+            topic_name=form_topic_name
+        )
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('create_post.html', username=username, topics=topics)
 
 # Users page - Admin Only
 @app.route('/users', methods=['GET', 'POST'])

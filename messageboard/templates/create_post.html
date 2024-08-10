@@ -11,32 +11,31 @@
     <div class="row">
         <div class="col">
 
-            <form method="POST" action="">
+            <form method="POST" action="{{ url_for('create_post') }}">
                 <div class="mb-3">
                     <label for="post-title" class="form-label">Enter Title</label>
                     <input type="text" minlength="5" maxlength="50" class="form-control" id="post-title"
                         name="post-title" placeholder="title" required>
                 </div>
                 <div class="mb-3">
-                    <select id="topic_id" name="topic_name" class="form-select" aria-label="Default select example"
+                    <select id="topic_name" name="topic_name" class="form-select" aria-label="Default select example"
                         required>
-                        <option disabled selected>Choose topic</option>
-
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-
+                        <option value="" disabled selected>Choose topic</option>
+                        {% for topic in topics %}
+                            <option value="{{ topic.id }}|{{ topic.name }}">{{ topic.name }}</option>
+                        {% endfor %}
                     </select>
+                    <label for="topic_name">Topic</label>
                 </div>
                 <div class="mb-3">
-                    <label for="post-content" class="form-label">Your post...</label>
-                    <textarea class="form-control" id="post-content" name="post-content" rows="3" required></textarea>
+                    <label for="post-content" class="form-label">Content</label>
+                    <textarea class="form-control" id="post-content" name="post-content" rows="3" required>Enter your post here</textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Create Post</button>
             </form>
+
         </div>
     </div>
-
 </section>
 
 
