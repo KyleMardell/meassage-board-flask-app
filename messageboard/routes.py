@@ -209,4 +209,5 @@ def users():
 @login_required
 def profile():
     username = session.get('username', None)
-    return render_template('profile.html', username=username)
+    user_id = session.get('user_id', None)
+    return render_template('profile.html', username=username, user_id=user_id)

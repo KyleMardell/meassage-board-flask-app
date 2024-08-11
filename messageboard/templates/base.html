@@ -18,7 +18,7 @@
             <div class="container-fluid">
                 {% if current_user.is_authenticated %}
                 <a class="navbar-brand" href="{{ url_for('home') }}">Message Board</a>
-                <h2 class="nav-link mb-0">Welcome: {{ username }}</h2>
+                <h2 class="nav-link mb-0 mx-2">Welcome: {{ username }}</h2>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
