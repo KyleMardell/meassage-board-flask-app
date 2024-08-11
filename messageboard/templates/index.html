@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
 <section class="container hero-section">
     <div class="row">
-        <div class="col text-center">
+        <div class="col text-center mt-5">
             <h1>
                 Welcome to Message Board
             </h1>
@@ -40,8 +41,9 @@
 <section class="container call-to-action">
     <div class="row m-5">
         <div class="col d-flex justify-content-center">
-            <a class="btn btn-primary" href="{{ url_for('login') }}">Join the conversation</a>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}">Join the conversation</a>
         </div>
     </div>
 </section>
+
 {% endblock %}

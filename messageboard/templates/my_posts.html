@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>My Posts</h1>
-<h2>Welcome: {{ username }}</h2>
-
 <section class="container">
+    <div class="row">
+        <div class="col col-12">
+            <h1 class="text-center m-5">My Posts</h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             {% for post in posts %}
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Created {{ post.date.strftime('%d-%m-%Y') }} by {{ post.creator_name }}</h6>
-                    {% if session['user_is_admin'] == True or session['user_id'] == post.creator_id %}
-                    <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn red">Delete</a>
-                    {% endif %}
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Created {{ post.date.strftime('%d-%m-%Y') }} by
+                        {{ post.creator_name }}</h6>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ post.content }}</p>
@@ -32,6 +32,9 @@
                                 aria-controls="view-comments-collapse-{{ post.id }}">
                                 View comments
                             </button>
+                            {% if session['user_is_admin'] == True or session['user_id'] == post.creator_id %}
+                            <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-danger my-2">Delete</a>
+                            {% endif %}
                             <div class="collapse" id="comment-form-collapse-{{ post.id }}">
                                 <div class="card card-body">
                                     <form method="POST" action="{{ url_for('create_comment') }}">
@@ -65,11 +68,6 @@
             {% endfor %}
         </div>
     </div>
-
 </section>
-
-
-
-
 
 {% endblock %}
