@@ -66,7 +66,8 @@ def logout():
 @login_required
 def home():
     username = session.get('username', None)
-    return render_template('home.html', username=username)
+    posts = list(Post.query.order_by(Post.date).all())
+    return render_template('home.html', username=username, posts=posts)
 
 
 # Topics
@@ -133,6 +134,25 @@ def create_post():
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('create_post.html', username=username, topics=topics)
+
+
+@app.route('/my_posts')
+@login_required
+def my_posts():
+    username = session.get('username', None)
+    user_id = session.get('user_id', None)
+    posts = list(Post.query.filter_by(creator_id=user_id).order_by(Post.date).all())
+    return render_template('my_posts.html', username=username, posts=posts)
+
+
+@app.route('/delete_post/<int:post_id>')
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('my_posts'))
+
 
 # Users page - Admin Only
 @app.route('/users', methods=['GET', 'POST'])
