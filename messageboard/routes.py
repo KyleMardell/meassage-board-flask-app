@@ -71,7 +71,8 @@ def logout():
 def home():
     username = session.get('username', None)
     posts = list(Post.query.order_by(Post.date).all())
-    return render_template('home.html', username=username, posts=posts)
+    comments = list(Comment.query.order_by(Comment.date).all())
+    return render_template('home.html', username=username, posts=posts, comments=comments)
 
 
 # Topics
@@ -146,7 +147,8 @@ def my_posts():
     username = session.get('username', None)
     user_id = session.get('user_id', None)
     posts = list(Post.query.filter_by(creator_id=user_id).order_by(Post.date).all())
-    return render_template('my_posts.html', username=username, posts=posts)
+    comments = list(Comment.query.order_by(Comment.date).all())
+    return render_template('my_posts.html', username=username, posts=posts, comments=comments)
 
 
 @app.route('/delete_post/<int:post_id>')
@@ -156,6 +158,27 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     return redirect(url_for('my_posts'))
+
+@app.route('/create_comment', methods=['GET', 'POST'])
+@login_required
+def create_comment():
+    username = session.get('username', None)
+    user_id = session.get('user_id', None)
+    
+    if request.method == 'POST':
+        current_time = datetime.now().strftime('%Y=%m-%d %H:%M:%S')
+
+        comment = Comment(
+            content=request.form.get('comment-content'),
+            date=current_time,
+            creator_name=username,
+            creator_id=user_id,
+            post_id=request.form.get('post-id')
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('home.html', username=username)
 
 
 # Users page - Admin Only

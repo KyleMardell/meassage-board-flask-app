@@ -20,7 +20,46 @@
                     <p class="card-text">{{ post.content }}</p>
                 </div>
                 <div class="card-footer">
-                    <!-- Add comments for post -->
+                    <div class="row">
+                        <div class="col col-12">
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#comment-form-collapse-{{ post.id }}" aria-expanded="false"
+                                aria-controls="comment-form-collapse-{{ post.id }}">
+                                Add comment
+                            </button>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#view-comments-collapse-{{ post.id }}" aria-expanded="false"
+                                aria-controls="view-comments-collapse-{{ post.id }}">
+                                View comments
+                            </button>
+                            <div class="collapse" id="comment-form-collapse-{{ post.id }}">
+                                <div class="card card-body">
+                                    <form method="POST" action="{{ url_for('create_comment') }}">
+                                        <input type="hidden" name="post-id" id="post-id" value="{{ post.id }}">
+                                        <div class="mb-3">
+                                            <label for="comment-content" class="form-label">Content</label>
+                                            <textarea class="form-control" id="comment-content" name="comment-content"
+                                                minlength="5" placeholder="Enter your comment here" rows="3"
+                                                required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="collapse" id="view-comments-collapse-{{ post.id }}">
+                                <div class="card card-body">
+                                    {% for comment in comments %}
+                                    {% if comment.post_id == post.id %}
+                                    <div class="col col-12">
+                                        <p>{{ comment.content }}</p>
+                                        <h6>{{ comment.creator_name }} - {{ comment.date.strftime('%d-%m-%Y') }}</h6>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}
