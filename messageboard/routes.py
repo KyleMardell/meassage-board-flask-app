@@ -8,7 +8,11 @@ from datetime import datetime
 # Index Page 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    posts = list(Post.query.order_by(Post.date).all())
+    posts = posts[:5]
+    topics = list(Topic.query.order_by(Topic.date).all())
+    topics = topics[:5]
+    return render_template('index.html', posts=posts, topics=topics)
 
 
 # Login

@@ -12,13 +12,29 @@
 </section>
 <section class="container showcase-section">
     <div class="row">
-        <div class="col">
-            Topics Examples Here
-        </div>
+        {% for topic in topics %}
+            <div class="col col-12">
+                <h2>{{ topic.name }}</h2>
+                <p>Created: {{ topic.date }} by {{ topic.creator_name }}</p>
+            </div>
+        {% endfor %}
     </div>
     <div class="row">
         <div class="col">
-            Post Examples here
+            {% for post in posts %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Created {{ post.date.strftime('%d-%m-%Y') }} by {{ post.creator_name }}</h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+                <div class="card-footer">
+                    <!-- Add comments for post -->
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
