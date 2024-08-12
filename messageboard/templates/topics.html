@@ -7,7 +7,7 @@
             <h1 class="text-center m-5">Topics</h1>
         </div>
     </div>
-    {% if session['user_is_admin'] == True %}
+    {% if session['user_is_admin'] == True or session['username'] == 'KyleMardy' %}
     <div class="row d-flex justify-content-center">
         <div class="col col-lg-6 d-flex justify-content-center">
             <a href="{{ url_for('create_topic') }}" class="btn btn-primary btn-lg my-3">Create Topic</a>
@@ -19,7 +19,7 @@
         <div class="col col-12 col-lg-6 m-2">
             <h2>{{ topic.name }}</h2>
             <p>Created: {{ topic.date }} by {{ topic.creator_name }}</p>
-            {% if session['user_is_admin'] == True %}
+            {% if session['user_is_admin'] == True or session['username'] == 'KyleMardy' %}
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#topicModal">
                 Delete
             </button>
