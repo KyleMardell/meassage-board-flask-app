@@ -1,3 +1,11 @@
+:root {
+    --palette-dark: #202735;
+    --palette-deep: #193468;
+    --palette-mid: #5e77d3;
+    --palette-light: #9aadec;
+    --palette-grey: #dce3fa;
+}
+
 * {
     border: 0;
     margin: 0;
@@ -8,4 +16,52 @@
 
 main {
     margin-top: 56px;
+}
+
+.bg-pal-dark{
+    background-color: var(--palette-dark);
+}
+
+.bg-pal-deep {
+    background-color: var(--palette-deep);
+}
+
+.bg-pal-mid {
+    background-color: var(--palette-mid);
+}
+
+.bg-pal-light {
+    background-color: var(--palette-light);
+}
+
+.bg-pal-grey {
+    background-color: var(--palette-grey);
+}
+
+.bg-pal-grad {
+    background: linear-gradient(125deg,var(--palette-light), var(--palette-mid), var(--palette-light));
+}
+
+.text-pal-light {
+    color: var(--palette-light);
+}
+
+.text-pal-grey {
+    color: var(--palette-grey);
+}
+
+.text-pal-dark {
+    color: var(--palette-dark);
+}
+
+.box-shadow-sm {
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.3), -3px -5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.drop-shadow-sm {
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+}
+
+.border-rad-sm {
+    border-radius: 10px;
 }

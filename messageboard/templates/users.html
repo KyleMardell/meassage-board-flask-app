@@ -20,7 +20,7 @@
             {% endwith %}
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center my-3">
         <div class="col col-lg-6">
             {% if session['user_is_admin'] == True %}
             <form method="POST" action="{{ url_for('users') }}">

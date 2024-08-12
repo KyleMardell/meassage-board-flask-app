@@ -4,7 +4,7 @@
 <section class="container hero-section">
     <div class="row">
         <div class="col text-center mt-5">
-            <h1>
+            <h1 class="drop-shadow-sm">
                 Welcome to Message Board
             </h1>
             <p>A place to share your thoughts and helpful tips</p>
@@ -13,7 +13,7 @@
 </section>
 <section class="container showcase-section">
     <div class="row my-5">
-        <h2 class="text-center mb-4">Here are some recent topics of discussion</h2>
+        <h2 class="text-center mb-4 drop-shadow-sm">Here are some recent topics of discussion</h2>
         {% for topic in topics %}
         <div class="col col-12 text-center">
             <h3>{{ topic.name }}</h3>
@@ -21,10 +21,10 @@
         {% endfor %}
     </div>
     <div class="row d-flex justify-content-center my-5">
-        <h2 class="text-center mb-3">Check out these recent posts</h2>
+        <h2 class="text-center mb-3 drop-shadow-sm">Check out these recent posts</h2>
         <div class="col col-lg-6">
             {% for post in posts %}
-            <div class="card my-3">
+            <div class="card my-3 box-shadow-sm bg-pal-grey">
                 <div class="card-header">
                     <h4 class="card-title">{{ post.title }}</h4>
                     <h6 class="card-subtitle mb-2 text-body-secondary">Created {{ post.date.strftime('%d-%m-%Y') }} by
@@ -41,7 +41,7 @@
 <section class="container call-to-action">
     <div class="row m-5">
         <div class="col d-flex justify-content-center">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}">Join the conversation</a>
+            <a class="btn btn-primary btn-lg box-shadow-sm" href="{{ url_for('login') }}">Join the conversation</a>
         </div>
     </div>
 </section>

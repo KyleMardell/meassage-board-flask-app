@@ -4,10 +4,10 @@
 <section class="container">
     <div class="row">
         <div class="col">
-            <h1 class="text-center m-5">Create Post</h1>
+            <h1 class="text-center m-5 drop-shadow-sm">Create Post</h1>
         </div>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center my-3">
         <div class="col col-lg-6">
             <form method="POST" action="{{ url_for('create_post') }}">
                 <div class="mb-3">
@@ -16,20 +16,24 @@
                         name="post-title" placeholder="title" required>
                 </div>
                 <div class="mb-3">
+                    <label for="topic_name" class="form-label">Topic</label>
                     <select id="topic_name" name="topic_name" class="form-select" aria-label="Default select example"
                         required>
                         <option value="" disabled selected>Choose topic</option>
                         {% for topic in topics %}
-                            <option value="{{ topic.id }}|{{ topic.name }}">{{ topic.name }}</option>
+                        <option value="{{ topic.id }}|{{ topic.name }}">{{ topic.name }}</option>
                         {% endfor %}
                     </select>
-                    <label for="topic_name">Topic</label>
+
                 </div>
                 <div class="mb-3">
                     <label for="post-content" class="form-label">Content</label>
-                    <textarea class="form-control" id="post-content" name="post-content" minlength="5" rows="3" placeholder="Enter your post here" required></textarea>
+                    <textarea class="form-control" id="post-content" name="post-content" minlength="5" rows="3"
+                        placeholder="Enter your post here" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-success">Create Post</button>
+                <div class="d-flex justify-content-center mb-3">
+                    <button type="submit" class="btn btn-success">Create Post</button>
+                </div>
             </form>
 
         </div>
