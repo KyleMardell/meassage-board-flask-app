@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <section class="container">
@@ -15,21 +14,34 @@
         </div>
     </div>
     {% endif %}
-
     <div class="row d-flex justify-content-center my-3">
         {% for topic in topics %}
-            <div class="col col-12 col-lg-6 m-2">
-                <h2>{{ topic.name }}</h2>
-                <p>Created: {{ topic.date }} by {{ topic.creator_name }}</p>
-
-                {% if session['user_is_admin'] == True %}
-                    <a href="{{ url_for('delete_topic', topic_id=topic.id) }}" class="btn btn-danger">Delete</a>
-                {% endif %}
-
+        <div class="col col-12 col-lg-6 m-2">
+            <h2>{{ topic.name }}</h2>
+            <p>Created: {{ topic.date }} by {{ topic.creator_name }}</p>
+            {% if session['user_is_admin'] == True %}
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#topicModal">
+                Delete
+            </button>
+            <div class="modal fade" id="topicModal" tabindex="-1" aria-labelledby="topicModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="topicModalLabel">Are you sure?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <a href="{{ url_for('delete_topic', topic_id=topic.id) }}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% endif %}
+        </div>
         {% endfor %}
     </div>
-
 </section>
 
 {% endblock %}
