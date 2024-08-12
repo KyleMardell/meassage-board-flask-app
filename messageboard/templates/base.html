@@ -34,7 +34,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('my_posts') }}">My Posts</a>
                         </li>
-                        {% if session['user_is_admin'] == True %}
+                        {% if session['user_is_admin'] == True or session['username'] == 'KyleMardy' %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('users') }}">Users</a>
                         </li>

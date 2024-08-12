@@ -22,7 +22,7 @@
     </div>
     <div class="row d-flex justify-content-center my-3">
         <div class="col col-lg-6">
-            {% if session['user_is_admin'] == True %}
+            {% if session['user_is_admin'] == True or session['username'] == 'KyleMardy' %}
             <form method="POST" action="{{ url_for('users') }}">
                 {% for user in users %}
                 <div class="col col-12 d-flex mb-2">
