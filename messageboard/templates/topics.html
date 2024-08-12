@@ -9,7 +9,7 @@
         </div>
     </div>
     {% if session['user_is_admin'] == True %}
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         <div class="col col-lg-6 d-flex justify-content-center">
             <a href="{{ url_for('create_topic') }}" class="btn btn-primary btn-lg my-3">Create Topic</a>
         </div>

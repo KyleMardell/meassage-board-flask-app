@@ -202,12 +202,3 @@ def users():
     users = list(User.query.order_by(User.id).all())
 
     return render_template('users.html', users=users, username=username)
-
-
-# Profile
-@app.route('/profile')
-@login_required
-def profile():
-    username = session.get('username', None)
-    user_id = session.get('user_id', None)
-    return render_template('profile.html', username=username, user_id=user_id)

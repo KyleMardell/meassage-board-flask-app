@@ -20,26 +20,28 @@
             {% endwith %}
         </div>
     </div>
-    <div class="row">
-        {% if session['user_is_admin'] == True %}
-        <form method="POST" action="{{ url_for('users') }}">
-            {% for user in users %}
-            <div class="col col-12 d-flex mb-2">
-                <div class="px-2">
-                    User: {{ user.username }}
+    <div class="row d-flex justify-content-center">
+        <div class="col col-lg-6">
+            {% if session['user_is_admin'] == True %}
+            <form method="POST" action="{{ url_for('users') }}">
+                {% for user in users %}
+                <div class="col col-12 d-flex mb-2">
+                    <div class="px-2">
+                        User: {{ user.username }}
+                    </div>
+                    <div class="form-check form-switch">
+                        <label class="form-check-label px-2" for="is-admin-{{ user.id }}"> Admin </label>
+                        <input class="form-check-input" type="checkbox" role="switch" id="is-admin-{{ user.id }}"
+                            name="is-admin-{{ user.id }}" {% if user.is_admin %} checked {% endif %}>
+                    </div>
                 </div>
-                <div class="form-check form-switch">
-                    <label class="form-check-label px-2" for="is-admin-{{ user.id }}"> Admin </label>
-                    <input class="form-check-input" type="checkbox" role="switch" id="is-admin-{{ user.id }}"
-                        name="is-admin-{{ user.id }}" {% if user.is_admin %} checked {% endif %}>
-                </div>
-            </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-success m-2">Confirm Changes</button>
-        </form>
-        {% else %}
-        <h3>Sorry this is an admin only page</h3>
-        {% endif %}
+                {% endfor %}
+                <button type="submit" class="btn btn-success m-2">Confirm Changes</button>
+            </form>
+            {% else %}
+            <h3>Sorry this is an admin only page</h3>
+            {% endif %}
+        </div>
     </div>
 </section>
 
