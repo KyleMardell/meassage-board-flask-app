@@ -1,9 +1,25 @@
 # Message Board Flask App
 
+Link - [Message Board App](https://message-board-app-07d4b12315a8.herokuapp.com/)
+
+This is a simple message board app i made in a weekend to learn more about flask and postgres.
+Login is basic only requiring a username and password. Passwords are encrypted.
+You can create a post with a topic or comment on another post.
+Admin can delete comments and posts.
+
+If i were to build it again i would only use 1 relationship per database table, for example using only the user id attached to posts and comments rather than using both id and username to make it easier to edit your username. Its all learning and i had fun building it.
+
+
+
+
+
+
+## Build and workspace details
+
 Due to using gitpod and the CI template, you must run "set_pg" in the terminal every time you open the workspace.
 If the workspace is completely closed, the database must be re-created initialized and populated, any previous data will be lost.
 
-Set up instructions
+### Set up instructions
 - install packages
   - Flask-SQLAlchemy (flask and sql alchemy in 1 install)
   - psycopg2 (to use postegresql database)
