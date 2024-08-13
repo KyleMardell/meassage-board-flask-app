@@ -22,18 +22,18 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col col-12">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            <button class="btn btn-primary my-1" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#comment-form-collapse-{{ post.id }}" aria-expanded="false"
                                 aria-controls="comment-form-collapse-{{ post.id }}">
                                 Add comment
                             </button>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            <button class="btn btn-primary my-1" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#view-comments-collapse-{{ post.id }}" aria-expanded="false"
                                 aria-controls="view-comments-collapse-{{ post.id }}">
                                 View comments
                             </button>
                             {% if session['user_is_admin'] == True %}
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger my-1" data-bs-toggle="modal"
                                 data-bs-target="#adminModal">
                                 Delete
                             </button>

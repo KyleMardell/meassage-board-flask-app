@@ -50,6 +50,8 @@ def signup():
             db.session.commit()
             login_user(new_user)
             session['username'] = username
+            session['user_id'] = new_user.id
+            session['user_is_admin'] = new_user.is_admin
             return redirect(url_for('home'))
         else:
             flash('Passwords do not match')
